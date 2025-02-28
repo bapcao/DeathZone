@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 879190125
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: bottle.csp
+      Dependencies: {}
+    Info_1:
+      Name: bullet.csp
+      Dependencies: {}

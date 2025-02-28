@@ -1,0 +1,44 @@
+ManifestFileVersion: 0
+CRC: 837813911
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 471fd6345c56d330a8a49d21333f9712
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 29a71197f4cded707886f96fa02a0770
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 471fd6345c56d330a8a49d21333f9712
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 2840ba954b4a4f449a5a69d394fee427, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefaps/Bottle1.mat
+- Assets/Tai_Nguyen/Models/Bottle.fbx
+- Assets/Prefaps/Bottle.prefab
+Dependencies: []
