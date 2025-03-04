@@ -20,7 +20,8 @@ public class MouseMovement : MonoBehaviour
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+       
+         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         //
@@ -32,6 +33,7 @@ public class MouseMovement : MonoBehaviour
         //
         yRotation += mouseX;
         transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0f);
+       
 
     }
 }
