@@ -16,6 +16,13 @@ public class Player : MonoBehaviour
 
     public bool isDead;
 
+    private Inventory inventory;
+
+    private void Awake()
+    {
+        inventory = new Inventory();
+    }
+
     private void Start()
     {
         //playerHealthUI.text = $"health: {HP}";
