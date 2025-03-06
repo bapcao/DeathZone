@@ -2,46 +2,40 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement; // ✅ Import SceneManager
 
 public class ZombieSpawnController : MonoBehaviour
 {
     public int initialZombiesPerWave = 5;
     public int currentZombiesPerWave;
-
-    public float spawnDelay = 0.5f; // Dellay between spawning each zombie in a wave;
+    public float spawnDelay = 0.5f;
 
     public int currentWave = 0;
-    public float waveCooldown = 10f; // Time in seconds between waves;
+    public float waveCooldown = 10f;
 
     public bool inCooldown;
-    public float cooldownCounter = 0; // we only use this for testing and the UI;
+    public float cooldownCounter = 0;
 
     public List<Enemy> currentZombiesAlive;
-
     public GameObject zombiePrefab;
 
     public TextMeshProUGUI waveOverUI;
     public TextMeshProUGUI cooldownCounterUI;
     public TextMeshProUGUI currentWaveUI;
 
-
     private void Start()
     {
         currentZombiesPerWave = initialZombiesPerWave;
-
         GlobalReferences.Instance.waveNumber = currentWave;
-
         StartNextWave();
     }
 
     private void StartNextWave()
     {
         currentZombiesAlive.Clear();
-
         currentWave++;
 
         GlobalReferences.Instance.waveNumber = currentWave;
-
         currentWaveUI.text = "Wave: " + currentWave.ToString();
 
         StartCoroutine(SpawnWave());
@@ -51,36 +45,28 @@ public class ZombieSpawnController : MonoBehaviour
     {
         for (int i = 0; i < currentZombiesPerWave; i++)
         {
-            // Generate a random offset within a specified range
-            Vector3 spawnOffset = new Vector3(Random.Range( -1f, 1f), 0f , Random.Range( 1f, 1f ) );
+            Vector3 spawnOffset = new Vector3(Random.Range(-1f, 1f), 0f, Random.Range(-1f, 1f));
             Vector3 spawnPosition = transform.position + spawnOffset;
 
-            //Insrantiate the zombie
-            var zombie = Instantiate(zombiePrefab, spawnPosition, Quaternion.identity );
-
-            // Get Enemy Script
+            var zombie = Instantiate(zombiePrefab, spawnPosition, Quaternion.identity);
             Enemy enemyScript = zombie.GetComponent<Enemy>();
 
-            // Track this zombie
             currentZombiesAlive.Add(enemyScript);
-
             yield return new WaitForSeconds(spawnDelay);
         }
     }
 
     private void Update()
     {
-        // get all dead zombie
         List<Enemy> zombiesToRemove = new List<Enemy>();
         foreach (Enemy zombie in currentZombiesAlive)
         {
-            if (zombie != null && zombie.isDead) // Kiểm tra zombie không bị null trước khi truy cập isDead
+            if (zombie != null && zombie.isDead)
             {
                 zombiesToRemove.Add(zombie);
             }
         }
 
-        // Actually remove all dead zombies
         foreach (Enemy zombie in zombiesToRemove)
         {
             currentZombiesAlive.Remove(zombie);
@@ -88,21 +74,17 @@ public class ZombieSpawnController : MonoBehaviour
 
         zombiesToRemove.Clear();
 
-        // start Cooldown if all zombies are dead
-        if (currentZombiesAlive.Count == 0 && inCooldown == false)
+        if (currentZombiesAlive.Count == 0 && !inCooldown)
         {
-            // Start cooldown for next wave
             StartCoroutine(WaveCooldown());
         }
 
-        // Run the cooldown counter
         if (inCooldown)
         {
             cooldownCounter -= Time.deltaTime;
         }
         else
         {
-            // Reset the counter
             cooldownCounter = waveCooldown;
         }
 
@@ -117,9 +99,16 @@ public class ZombieSpawnController : MonoBehaviour
         yield return new WaitForSeconds(waveCooldown);
 
         inCooldown = false;
-        waveOverUI.gameObject.SetActive(false );
+        waveOverUI.gameObject.SetActive(false);
 
-        currentZombiesPerWave *= 2; /// 5*2 = 10
+        // 🔥 Nếu hoàn thành Wave 2, chuyển sang Scene Victory
+        if (currentWave >= 2)
+        {
+            SceneManager.LoadScene("VictoryScene"); // ✅ Chuyển Scene
+            yield break;
+        }
+
+        currentZombiesPerWave *= 2;
         StartNextWave();
     }
 }

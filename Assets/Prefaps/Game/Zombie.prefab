@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zombieHand: {fileID: 2955808237736665242}
-  zombieDamage: 10
+  zombieDamage: 0
 --- !u!54 &2181379983459956531
 Rigidbody:
   m_ObjectHideFlags: 0
