@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
@@ -13,52 +11,41 @@ public class SoundManager : MonoBehaviour
 
     [Header("Shooting Sounds")]
     public AudioSource ShootingChannel;
-    public AudioClip UziShot;
-    public AudioClip Pistol_FShot;
-    public AudioClip M107Shot;
-    public AudioClip AK47Shot;
+    public AudioClip UziShot, Pistol_FShot, M107Shot, AK47Shot;
 
     [Header("Reload Sounds")]
-    public AudioSource reloadingSoundUzi;
-    public AudioSource reloadingSoundPistol_F;
-    public AudioSource reloadingSoundM107;
-    public AudioSource reloadingSoundAK47;
+    public AudioSource reloadingSoundUzi, reloadingSoundPistol_F, reloadingSoundM107, reloadingSoundAK47;
 
     [Header("Other Sounds")]
-    public AudioSource emptyManagazineSoundUzi;
-    public AudioSource throwablesChannel;
+    public AudioSource emptyManagazineSoundUzi, throwablesChannel;
     public AudioClip grenadeSound;
 
     [Header("Zombie Sounds")]
-    public AudioClip zombieWalking;
-    public AudioClip zombieChase;
-    public AudioClip zombieAttack;
-    public AudioClip zombieHurt;
-    public AudioClip zombieDeath;
-    public AudioSource zombieChannel;
-    public AudioSource zombieChannel2;
+    public AudioSource zombieChannel, zombieChannel2;
+    public AudioClip zombieWalking, zombieChase, zombieAttack, zombieHurt, zombieDeath;
 
     [Header("Player Sounds")]
-    public AudioSource playerChannel;
-    public AudioSource gameChanel;
-    public AudioClip playerHurt;
-    public AudioClip playerDie;
+    public AudioSource playerChannel, gameChannel;
+    public AudioClip playerHurt, playerDie;
 
     [Header("Game Music")]
-    public AudioClip gameOverMusic;
-    public AudioClip gameMusic;
+    public AudioClip gameOverMusic, gameMusic;
 
     private void Awake()
     {
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            return;
         }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // Giữ âm thanh khi chuyển scene
-        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // Giữ âm thanh khi chuyển scene
+    }
+
+    private void Start()
+    {
+        LoadVolume(); // Load âm lượng ngay khi khởi động
     }
 
     public void PlayShootingSound(Weapon.WeaponModel weapon)
@@ -94,7 +81,7 @@ public class SoundManager : MonoBehaviour
                 reloadingSoundM107.Play();
                 break;
             case Weapon.WeaponModel.Ak47:
-                reloadingSoundM107.Play();
+                reloadingSoundAK47.Play(); // Đã sửa lỗi gọi nhầm
                 break;
         }
     }
@@ -107,20 +94,24 @@ public class SoundManager : MonoBehaviour
 
     public void PlayGameMusic()
     {
-        gameChanel.clip = gameMusic;
-        gameChanel.Play();
+        gameChannel.clip = gameMusic;
+        gameChannel.Play();
     }
 
     public void SetMusicVolume(float volume)
     {
+        volume = Mathf.Clamp(volume, 0.0001f, 1f); // Tránh Log(0) gây lỗi
         myMixer.SetFloat("music", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("musicVolume", volume);
+        PlayerPrefs.Save();
     }
 
     public void SetSFXVolume(float volume)
     {
+        volume = Mathf.Clamp(volume, 0.0001f, 1f); // Tránh Log(0) gây lỗi
         myMixer.SetFloat("SFX", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("SFXVolume", volume);
+        PlayerPrefs.Save();
     }
 
     public void LoadVolume()
@@ -128,7 +119,7 @@ public class SoundManager : MonoBehaviour
         float musicVolume = PlayerPrefs.GetFloat("musicVolume", 0.75f);
         float SFXVolume = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
 
-        myMixer.SetFloat("music", Mathf.Log10(musicVolume) * 20);
-        myMixer.SetFloat("SFX", Mathf.Log10(SFXVolume) * 20);
+        SetMusicVolume(musicVolume); // Gọi SetMusicVolume để đảm bảo tính toán đúng
+        SetSFXVolume(SFXVolume);
     }
 }

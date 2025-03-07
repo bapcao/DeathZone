@@ -17365,6 +17365,7 @@ MonoBehaviour:
   - {fileID: 7292808117586842926, guid: 542c92fb752aed142a91ef2ae943eda2, type: 3}
   chunkSize: 10
   renderDistance: 2
+  renderThreshold: 60
 --- !u!4 &955338729
 Transform:
   m_ObjectHideFlags: 0
