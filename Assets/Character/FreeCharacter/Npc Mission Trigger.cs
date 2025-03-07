@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class NPCMission : MonoBehaviour
 {
@@ -8,9 +9,12 @@ public class NPCMission : MonoBehaviour
     public GameObject missionCornerPanel; // UI nhiệm vụ ở góc trên trái
     public TextMeshProUGUI missionCornerText; // Văn bản nhiệm vụ ở góc trên trái
     public float detectionRadius = 3f; // Bán kính phát hiện nhân vật
+    public float textSpeed = 0.05f; // Tốc độ hiển thị từng chữ
+
     private Transform player;
-    private string currentMission = "Nhiệm vụ: Bạn hãy sống sót qua 2 đợt của zombie!";
+    private string currentMission = "Nhiệm vụ: Bạn hãy sống sót qua 2 wave của zombie!";
     private bool wave1Completed = false;
+    private bool isDisplayingText = false;
 
     void Start()
     {
@@ -22,10 +26,10 @@ public class NPCMission : MonoBehaviour
     void Update()
     {
         float distance = Vector3.Distance(transform.position, player.position);
-        if (distance <= detectionRadius && !missionPanel.activeSelf)
+        if (distance <= detectionRadius && !missionPanel.activeSelf && !isDisplayingText)
         {
             missionPanel.SetActive(true); // Hiện nhiệm vụ khi nhân vật đến gần
-            missionText.text = currentMission; // Hiển thị toàn bộ nội dung nhiệm vụ ngay lập tức
+            StartCoroutine(ShowText()); // Chạy hiệu ứng hiển thị từng chữ
         }
         else if (distance > detectionRadius && missionPanel.activeSelf)
         {
@@ -33,6 +37,18 @@ public class NPCMission : MonoBehaviour
             missionCornerPanel.SetActive(true); // Hiển thị nhiệm vụ ở góc trên trái
             missionCornerText.text = currentMission;
         }
+    }
+
+    IEnumerator ShowText()
+    {
+        isDisplayingText = true;
+        missionText.text = "";
+        foreach (char letter in currentMission)
+        {
+            missionText.text += letter;
+            yield return new WaitForSeconds(textSpeed);
+        }
+        isDisplayingText = false;
     }
 
     public void CompleteWave1()
