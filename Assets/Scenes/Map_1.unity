@@ -1453,9 +1453,19 @@ PrefabInstance:
       objectReference: {fileID: 2105006107}
     - target: {fileID: 3303363533499409749, guid: 98dadb6391aa0a24ab29e422a03f7236,
         type: 3}
+      propertyPath: startDialogueText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3303363533499409749, guid: 98dadb6391aa0a24ab29e422a03f7236,
+        type: 3}
       propertyPath: missionCornerPanel
       value: 
       objectReference: {fileID: 712515651}
+    - target: {fileID: 3303363533499409749, guid: 98dadb6391aa0a24ab29e422a03f7236,
+        type: 3}
+      propertyPath: startDialoguePanel
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7128273032619492166, guid: 98dadb6391aa0a24ab29e422a03f7236,
         type: 3}
       propertyPath: m_Name
@@ -14400,13 +14410,18 @@ PrefabInstance:
     - target: {fileID: 6427087818537099915, guid: 78b483556aef9c84ab0d588096401c68,
         type: 3}
       propertyPath: currentWave
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6427087818537099915, guid: 78b483556aef9c84ab0d588096401c68,
         type: 3}
       propertyPath: currentWaveUI
       value: 
       objectReference: {fileID: 502785542}
+    - target: {fileID: 6427087818537099915, guid: 78b483556aef9c84ab0d588096401c68,
+        type: 3}
+      propertyPath: introDialogueUI
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6427087818537099915, guid: 78b483556aef9c84ab0d588096401c68,
         type: 3}
       propertyPath: cooldownCounterUI
@@ -14416,6 +14431,11 @@ PrefabInstance:
         type: 3}
       propertyPath: missionCompletePanel
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6427087818537099915, guid: 78b483556aef9c84ab0d588096401c68,
+        type: 3}
+      propertyPath: initialZombiesPerWave
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
