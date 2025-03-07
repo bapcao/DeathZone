@@ -3,40 +3,21 @@ using UnityEngine.UI;
 
 public class VolumeSetting : MonoBehaviour
 {
-    [SerializeField] private Slider musicSlider;
-    [SerializeField] private Slider SFXSlider;
+    [Header("----------------Audio Source-------------------")]
+    [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioSource SFXSource;
+
+    [Header("----------------Audio Clip --------------------")]
+    public AudioClip GameMusic;
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("musicVolume"))
-        {
-            LoadVolume();
-        }
-        else
-        {
-            SetMusicVolume();
-            SetSFXVolume();
-        }
+        musicSource.clip = GameMusic;
+        musicSource.Play();
     }
 
-    public void SetMusicVolume()
+    public void PlaySFX(AudioClip clip)
     {
-        float volume = musicSlider.value;
-        SoundManager.Instance.SetMusicVolume(volume);
-    }
-
-    public void SetSFXVolume()
-    {
-        float volume = SFXSlider.value;
-        SoundManager.Instance.SetSFXVolume(volume);
-    }
-
-    private void LoadVolume()
-    {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume", 0.75f);
-        SFXSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
-
-        SetMusicVolume();
-        SetSFXVolume();
+        SFXSource.PlayOneShot(clip);
     }
 }

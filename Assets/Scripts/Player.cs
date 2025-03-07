@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private UI_Inventory uiInventory;
     public int HP = 100;
     public GameObject bloodyScreen;
 
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         inventory = new Inventory();
+        uiInventory.SetInventory(inventory);
     }
 
     private void Start()

@@ -35,6 +35,9 @@ namespace SlimUI.ModernMenu{
         [Tooltip("The UI Panel that holds the VIDEO window tab")]
         public GameObject PanelVideo;
         [Tooltip("The UI Panel that holds the GAME window tab")]
+        public GameObject PanelSound;
+        [Tooltip("The UI Panel that holds the GAME window tab")]
+
         public GameObject PanelGame;
         [Tooltip("The UI Panel that holds the KEY BINDINGS window tab")]
         public GameObject PanelKeyBindings;
@@ -51,7 +54,8 @@ namespace SlimUI.ModernMenu{
         [Tooltip("Highlight Image for when GAME Tab is selected in Settings")]
         public GameObject lineGame;
         [Tooltip("Highlight Image for when VIDEO Tab is selected in Settings")]
-        public GameObject lineVideo;
+        public GameObject lineSound;
+		public GameObject lineVideo;
         [Tooltip("Highlight Image for when CONTROLS Tab is selected in Settings")]
         public GameObject lineControls;
         [Tooltip("Highlight Image for when KEY BINDINGS Tab is selected in Settings")]
@@ -160,6 +164,7 @@ namespace SlimUI.ModernMenu{
 			PanelControls.SetActive(false);
 			PanelVideo.SetActive(false);
 			PanelGame.SetActive(false);
+			PanelSound.SetActive(false);
 			PanelKeyBindings.SetActive(false);
 
 			lineGame.SetActive(false);
@@ -187,7 +192,14 @@ namespace SlimUI.ModernMenu{
 			lineVideo.SetActive(true);
 		}
 
-		public void ControlsPanel(){
+        public void SoundPanel()
+        {
+            DisablePanels();
+            PanelSound.SetActive(true);
+            lineControls.SetActive(true);
+        }
+
+        public void ControlsPanel(){
 			DisablePanels();
 			PanelControls.SetActive(true);
 			lineControls.SetActive(true);
