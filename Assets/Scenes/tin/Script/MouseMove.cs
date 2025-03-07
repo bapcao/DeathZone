@@ -17,7 +17,8 @@ public class MouseMove : MonoBehaviour
  
     void Update()
     {
-       float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+       if (InventorySystem.Instance.isOpen == false) {
+         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
  
        //control rotation around x axis (Look up and down)
@@ -32,5 +33,7 @@ public class MouseMove : MonoBehaviour
        //applying both rotations
        transform.localRotation = Quaternion.Euler(xRotation, YRotation, 0f);
  
+       }
+       
     }
 }
