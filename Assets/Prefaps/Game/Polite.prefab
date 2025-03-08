@@ -2549,8 +2549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c0cb858426af0149818303a9b44dcfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieHand: {fileID: 0}
-  zombieDamage: 0
+  zombieHand: {fileID: 1226535767567854994}
+  zombieDamage: 20
 --- !u!54 &203066349506053086
 Rigidbody:
   m_ObjectHideFlags: 0
