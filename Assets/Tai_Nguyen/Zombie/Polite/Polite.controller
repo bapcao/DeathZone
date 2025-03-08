@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09888fc6764871f41aa52884c034d33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolingTime: 10
+  patrolingTime: 6
   detectionArea: 18
   patrolSpeed: 1.5
 --- !u!114 &-4968836923973838109

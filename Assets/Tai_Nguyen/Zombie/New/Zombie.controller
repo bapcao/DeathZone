@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolingTime: 10
-  detectionArea: 18
+  detectionArea: 30
   patrolSpeed: 1.5
 --- !u!114 &-4968836923973838109
 MonoBehaviour:
@@ -254,7 +254,7 @@ AnimatorStateMachine:
     m_Position: {x: 730, y: -40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4789365049699011027}
-    m_Position: {x: 950, y: -40, z: 0}
+    m_Position: {x: 970, y: -130, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -8733878417125520817}
@@ -487,8 +487,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 798527deaf6dd274daf3b2b63b1258b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseSpeed: 6
-  stopChasingDistance: 19
+  chaseSpeed: 10
+  stopChasingDistance: 31
   attackingDistance: 2.5
 --- !u!1102 &1669951773394358725
 AnimatorState:

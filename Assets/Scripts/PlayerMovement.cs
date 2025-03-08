@@ -7,7 +7,9 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
 
     public float speed = 12f;
-    public float gravity = -9.81f; // Trọng lực tiêu chuẩn
+    public float dashSpeed = 24f; // Tốc độ khi Dash
+    public float dashTime = 0.2f; // Thời gian Dash
+    public float gravity = -9.81f;
     public float jumpHeight = 3f;
 
     public Transform groundCheck;
@@ -15,11 +17,10 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
 
     private Vector3 velocity;
-    private Vector3 lastPosition; // Khai báo biến lastPosition ở đây
-
     private bool isGrounded;
     private bool isMoving;
-
+    private bool isDashing;
+    
     void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -29,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
-        // Cải thiện xử lý chạm đất (bỏ dòng đặt lại vận tốc không cần thiết)
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = 0f;
@@ -39,18 +39,22 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
         Vector3 move = transform.right * x + transform.forward * z;
 
-        controller.Move(move * speed * Time.deltaTime);
+        float currentSpeed = speed;
+        if (Input.GetKey(KeyCode.LeftShift) && isMoving)
+        {
+            currentSpeed = dashSpeed;
+        }
+        
+        controller.Move(move * currentSpeed * Time.deltaTime);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // Tính toán nhảy chính xác
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
         }
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
 
-        isMoving = move.magnitude > 0.1f || !isGrounded; // Cải thiện kiểm tra isMoving
-
-        lastPosition = transform.position;
+        isMoving = move.magnitude > 0.1f || !isGrounded;
     }
 }
